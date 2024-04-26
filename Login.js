@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, Image, ScrollView, TextInput, SafeAreaView, StyleSheet, Pressable, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ScrollView, TextInput, SafeAreaView, StyleSheet, Pressable, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
+// import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+
+// const googleIcon = <FontAwesome6 name={'google'} />;
+// const facebookIcon = <FontAwesome6 name={'git'} />;
+// const appleIcon = <FontAwesome6 name={'git'} />;
 // import "@fontsource/poppins/700-italic.css"; 
 
 const Login = ({ navigation }) => {
@@ -23,76 +28,103 @@ const Login = ({ navigation }) => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.titleContainer}>
-                <Text
-                    style={styles.title}>Login here</Text>
-                <Text
-                    style={styles.subTitle}>Welcome back you've been missed!</Text>
-            </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <SafeAreaView style={styles.container}>
+                <View style={styles.titleContainer}>
+                    <Text
+                        style={styles.title}>Login here</Text>
+                    <Text
+                        style={styles.subTitle}>Welcome back you've been missed!</Text>
+                </View>
 
-            <View style={styles.textInputContainer}>
-                <TouchableOpacity onPress={handleEmailFocus}>
-                    <TextInput
-                        onFocus={handleEmailFocus}
-                        onBlur={handleEmailBlur}
-                        style={[styles.textInput, emailActive && styles.textInputFocus]}
-                        placeholder="Email"
-                        placeholderTextColor='#626262'
-                    />
-                </TouchableOpacity>
+                <View style={styles.textInputContainer}>
+                    <TouchableOpacity onPress={handleEmailFocus}>
+                        <TextInput
+                            onFocus={handleEmailFocus}
+                            onBlur={handleEmailBlur}
+                            style={[styles.textInput, emailActive && styles.textInputFocus]}
+                            placeholder="Email"
+                            placeholderTextColor='#626262'
+                        />
+                    </TouchableOpacity>
 
-                <TouchableOpacity onPress={handlePasswordFocus}>
-                    <TextInput
-                        onFocus={handlePasswordFocus}
-                        onBlur={handlePasswordBlur}
-                        style={[styles.textInput, passwordActive && styles.textInputFocus]}
-                        placeholder="Password"
-                        placeholderTextColor='#626262'
-                    />
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={handlePasswordFocus}>
+                        <TextInput
+                            onFocus={handlePasswordFocus}
+                            onBlur={handlePasswordBlur}
+                            style={[styles.textInput, passwordActive && styles.textInputFocus]}
+                            placeholder="Password"
+                            placeholderTextColor='#626262'
+                        />
+                    </TouchableOpacity>
 
-                <TouchableOpacity
-                    onPress={() => 'null'}>
-                    <Text style={styles.forgotPassword}>
-                        Forgot your password?
-                    </Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => 'null'}>
+                        <Text style={styles.forgotPassword}>
+                            Forgot your password?
+                        </Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity
-                    style={styles.signInButton}
-                    onPress={() => 'null'}>
-                    <Text style={styles.signInTitle}>Sign in</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.signInButton}
+                        onPress={() => 'null'}>
+                        <Text style={styles.signInTitle}>Sign in</Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('Register')}>
-                    <Text style={styles.createNewAccountTitle}>Create new account</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Register')}>
+                        <Text style={styles.createNewAccountTitle}>Create new account</Text>
+                    </TouchableOpacity>
 
-                <Text style={styles.continueWithTitle}>Or continue with</Text>
-                
-            </View>
+                    <Text style={styles.continueWithTitle}>Or continue with</Text>
 
+                    <View style={styles.autoLoginContainer}>
+                        <TouchableOpacity onPress={() => 'null'}>
+                            <View style={styles.autoLoginBG}>
+                                <Image
+                                    source={{
+                                        uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
+                                    }}
+                                    style={styles.autoLoginIcon}
+                                />
+                            </View>
+                        </TouchableOpacity>
 
-            {/* <View>
-                <Image
-                    source={{
-                        uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
-                    }}
-                    style={{ width: 200, height: 200 }}
-                />
+                        <TouchableOpacity onPress={() => 'null'}>
+                            <View style={styles.autoLoginBG}>
+                                <Image
+                                    source={{
+                                        uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
+                                    }}
+                                    style={styles.autoLoginIcon}
+                                />
+                            </View>
+                        </TouchableOpacity>
 
-            </View> */}
+                        <TouchableOpacity onPress={() => 'null'}>
+                            <View style={styles.autoLoginBG}>
+                                <Image
+                                    source={{
+                                        uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
+                                    }}
+                                    style={styles.autoLoginIcon}
+                                />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
 
-        </SafeAreaView>
+                </View>
+
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
+
 
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-
+        flex: 1
     },
     titleContainer: {
         width: 225,
@@ -201,6 +233,51 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: '#064BB5'
     },
+    autoLoginContainer: {
+        width: 200,
+        alignSelf: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    autoLoginBG: {
+        width: 60,
+        height: 44,
+        backgroundColor: '#ECECEC',
+        gap: 10,
+        borderRadius: 10,
+        paddingTop: 10,
+        paddingRight: 20,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    autoLoginIcon: {
+        width: 18.75,
+        height: 18.75
+    }
 });
 
 export default Login;
+
+// {Platform.OS === 'ios' && <View>
+//                     <ImgButtonComp
+//                       iconRight={require('../../../assets/apple-icon.png')}
+//                       onPress={SignInWithAppleButton({
+//                         callBack: this.appleSignIn,
+//                       })}
+//                       isloading={this.state.setAppleLoading}
+//                       text={Trans.translate("sign_in_with_apple")}
+//                       style={{ backgroundColor: 'white', borderColor: "#000000", borderWidth: 1.5 }}
+//                       textcolor='black'
+//                       iconLeft={require('../../../assets/polygon.png')}
+//                     />
+//                     <View style={{ position: 'absolute', width: '100%', height: 60 }}>
+//                       {SignInWithAppleButton({
+//                         buttonStyle: { height: 60 },
+//                         callBack: this.appleSignIn,
+//                         buttonText: " ",
+//                       })}
+//                     </View>
+//                   </View>} 
