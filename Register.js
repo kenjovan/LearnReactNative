@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, Image, ScrollView, TextInput, SafeAreaView, StyleSheet, Pressable, TouchableOpacity } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { View, Text, Image, ScrollView, TextInput, SafeAreaView, StyleSheet, Pressable, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 // import "@fontsource/poppins/700-italic.css"; 
 
-const Register = () => {
+const Register = ({ navigation }) => {
     const [emailActive, setEmailActive] = useState(false);
     const [passwordActive, setPasswordActive] = useState(false);
+    const [confPasswordActive, setconfPasswordActive] = useState(false);
 
     const handleEmailFocus = () => {
         setEmailActive(true);
@@ -24,99 +23,114 @@ const Register = () => {
         setPasswordActive(false);
     };
 
+    const handleConfPasswordFocus = () => {
+        setconfPasswordActive(true);
+    };
+
+    const handleConfPasswordBlur = () => {
+        setconfPasswordActive(false);
+    };
+
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.titleContainer}>
-                <Text
-                    style={styles.title}>Login here</Text>
-                <Text
-                    style={styles.subTitle}>Welcome back you've been missed!</Text>
-            </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <SafeAreaView style={styles.container}>
+                <View style={styles.titleContainer}>
+                    <Text
+                        style={styles.title}>Create Account</Text>
+                    <Text
+                        style={styles.subTitle}>Create an account so you can explore all the available cat for adoption</Text>
+                </View>
 
-            <View style={styles.textInputContainer}>
-                <TouchableOpacity onPress={handleEmailFocus}>
-                    <TextInput
-                        onFocus={handleEmailFocus}
-                        onBlur={handleEmailBlur}
-                        style={[styles.textInput, emailActive && styles.textInputFocus]}
-                        placeholder="Email"
-                        placeholderTextColor='#626262'
-                    />
-                </TouchableOpacity>
+                <View style={styles.textInputContainer}>
+                    <TouchableOpacity onPress={handleEmailFocus}>
+                        <TextInput
+                            onFocus={handleEmailFocus}
+                            onBlur={handleEmailBlur}
+                            style={[styles.textInput, emailActive && styles.textInputFocus]}
+                            placeholder="Email"
+                            placeholderTextColor='#626262'
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handlePasswordFocus}>
+                        <TextInput
+                            onFocus={handlePasswordFocus}
+                            onBlur={handlePasswordBlur}
+                            style={[styles.textInput, passwordActive && styles.textInputFocus]}
+                            placeholder="Password"
+                            placeholderTextColor='#626262'
+                        />
+                    </TouchableOpacity>
 
-                <TouchableOpacity onPress={handlePasswordFocus}>
-                    <TextInput
-                        onFocus={handlePasswordFocus}
-                        onBlur={handlePasswordBlur}
-                        style={[styles.textInput, passwordActive && styles.textInputFocus]}
-                        placeholder="Password"
-                        placeholderTextColor='#626262'
-                    />
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={handleConfPasswordFocus}>
+                        <TextInput
+                            onFocus={handleConfPasswordFocus}
+                            onBlur={handleConfPasswordBlur}
+                            style={[styles.textInput, confPasswordActive && styles.textInputFocus]}
+                            placeholder="Confirm Password"
+                            placeholderTextColor='#626262'
+                        />
+                    </TouchableOpacity>
 
-                <TouchableOpacity onPress={handleEmailFocus}>
-                    <TextInput
-                        onFocus={handleEmailFocus}
-                        onBlur={handleEmailBlur}
-                        style={[styles.textInput, emailActive && styles.textInputFocus]}
-                        placeholder="Email"
-                        placeholderTextColor='#626262'
-                    />
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.signInButton}
+                        onPress={() => navigation.navigate('Login')}>
+                        <Text style={styles.signInTitle}>Sign up</Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity onPress={handlePasswordFocus}>
-                    <TextInput
-                        onFocus={handlePasswordFocus}
-                        onBlur={handlePasswordBlur}
-                        style={[styles.textInput, passwordActive && styles.textInputFocus]}
-                        placeholder="Password"
-                        placeholderTextColor='#626262'
-                    />
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Login')}>
+                        <Text style={styles.createNewAccountTitle}>Already have an account</Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity
-                    onPress={() => 'null'}>
-                    <Text style={styles.forgotPassword}>
-                        Forgot your password?
-                    </Text>
-                </TouchableOpacity>
+                    <Text style={styles.continueWithTitle}>Or continue with</Text>
 
-                <TouchableOpacity
-                    style={styles.signInButton}
-                    onPress={() => 'null'}>
-                    <Text style={styles.signInTitle}>Sign up</Text>
-                </TouchableOpacity>
+                    <View style={styles.autoLoginContainer}>
+                        <TouchableOpacity onPress={() => 'null'}>
+                            <View style={styles.autoLoginBG}>
+                                <Image
+                                    source={{
+                                        uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
+                                    }}
+                                    style={styles.autoLoginIcon}
+                                />
+                            </View>
+                        </TouchableOpacity>
 
-                <TouchableOpacity
-                    onPress={() => 'null'}>
-                    <Text style={styles.createNewAccountTitle}>Create new account</Text>
-                </TouchableOpacity>
+                        <TouchableOpacity onPress={() => 'null'}>
+                            <View style={styles.autoLoginBG}>
+                                <Image
+                                    source={{
+                                        uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
+                                    }}
+                                    style={styles.autoLoginIcon}
+                                />
+                            </View>
+                        </TouchableOpacity>
 
-                <Text style={styles.continueWithTitle}>Or continue with</Text>
-            </View>
-
-
-            {/* <View>
-                <Image
-                    source={{
-                        uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
-                    }}
-                    style={{ width: 200, height: 200 }}
-                />
-
-            </View> */}
-
-        </SafeAreaView>
+                        <TouchableOpacity onPress={() => 'null'}>
+                            <View style={styles.autoLoginBG}>
+                                <Image
+                                    source={{
+                                        uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
+                                    }}
+                                    style={styles.autoLoginIcon}
+                                />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
 
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-
+        flex: 1
     },
     titleContainer: {
-        width: 225,
+        width: 326,
         // height: 131,
         // borderWidth: 1,
         alignItems: 'center',
@@ -134,9 +148,9 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         textAlign: 'center',
-        lineHeight: 30,
-        fontSize: 20,
-        fontWeight: '600',
+        lineHeight: 21,
+        fontSize: 14,
+        fontWeight: '500',
     },
     textInputContainer: {
         width: 357,
@@ -199,7 +213,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         lineHeight: 20,
         fontWeight: '500',
-        // alignItems:'center'
     },
     signInTitle: {
         textAlign: 'center',
@@ -222,6 +235,30 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: '#064BB5'
     },
+    autoLoginContainer: {
+        width: 200,
+        alignSelf: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    autoLoginBG: {
+        width: 60,
+        height: 44,
+        backgroundColor: '#ECECEC',
+        gap: 10,
+        borderRadius: 10,
+        paddingTop: 10,
+        paddingRight: 20,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    autoLoginIcon: {
+        width: 18.75,
+        height: 18.75
+    }
 });
 
 export default Register;
