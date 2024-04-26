@@ -4,6 +4,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from "./Login"
 import Register from './Register';
+import Dashboard from './Dashboard';
 
 
 const Stack = createNativeStackNavigator();
@@ -76,6 +77,7 @@ const App = () => {
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={Login} options={{ title: 'Login', headerShown: false }}/>
         <Stack.Screen name="Register" component={Register} options={{ title: 'Register', headerShown: false }}/>
+        <Stack.Screen name="Dashboard" component={Dashboard} options={{ title: 'Dashboard' }}/>
       </Stack.Navigator>
     </NavigationContainer>
 
