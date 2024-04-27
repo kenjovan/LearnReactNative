@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, Image, ScrollView, TextInput, SafeAreaView, StyleSheet, Pressable, TouchableOpacity } from 'react-native';
-// import "@fontsource/poppins/700-italic.css"; 
 
 const Dashboard = ({ navigation }) => {
     const [emailActive, setEmailActive] = useState(false);
